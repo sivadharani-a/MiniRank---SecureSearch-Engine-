@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SecureSearch Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>SecureSearch Engine</h1>
+    <form method="POST">
+        <input type="text" name="query" placeholder="Enter your search query" value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+    {% if message %}
+    <p class="message">{{ message }}</p>
+    {% endif %}
+    {% if results %}
+    <h2>Results:</h2>
+    <ul>
+        {% for title, content, score in results %}
+        <li>
+            <h3>{{ title }} (Score: {{ '%.2f'|format(score) }})</h3>
+            <p>{{ content }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+</body>
+</html>
